@@ -40,6 +40,7 @@ def create_grammar(grammar_str, split='=>', line_split='\n'):
     return grammar
 
 
+
 def generate(gram, target):
     """
     读入语法字典，生成符合目标层级的语言
