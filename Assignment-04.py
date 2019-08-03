@@ -43,7 +43,7 @@ def strip_wiki_source(wiki_source):
     output_file.close()
     
     """
-    输入样例：
+    输出样例：
     Starting processing....
     Processing ended.....
     ----Processed in 2205.73681807518s----
@@ -64,7 +64,7 @@ def get_cut_lines(wiki_stripped):
     output_file.close()
 
     """
-    输入样例：
+    输出样例：
     Starting processing....
     Building prefix dict from the default dictionary ...
     Loading model from cache C:\Users\xyf22\AppData\Local\Temp\jieba.cache
