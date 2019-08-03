@@ -4,7 +4,7 @@ from opencc import OpenCC
 import logging
 import jieba
 import pickle
-
+ 
 # 装饰器，用以统计函数执行时间
 def time_func(f):
     def wrapper(*args):
