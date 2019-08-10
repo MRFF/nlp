@@ -1,2 +1,2 @@
 # nlp
-for nlp records
+for nlp record
