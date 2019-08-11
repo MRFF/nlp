@@ -170,6 +170,48 @@ def use_word2vec_model():
     The similarity between 爱迪生 and 孔乙己 is 0.03432663738711356
     """
 
+# 继续训练word2vec，一次性训练所有文本内存吃不消，所以分次训练
+@time_func
+def continue_train_word2vec(model):
+    # model = Word2Vec.load('wiki_word2vec.model')
+    cut_file = open('cut_lines', 'rb')
+    sentences = []
+    processed = 0
+    threshold = 2000000
+    # 每次训练的训练量
+    batch_size = 200000
+    # 每次训练的指针
+    count = 0
+    while True:
+        try:
+            processed += 1
+            text = pickle.load(cut_file)      
+            if processed > threshold:
+                sentences.append(text)
+                count += 1
+                # 每20万行训练一次，之后将sentences和count清空
+                if count == batch_size:
+                    model.train(sentences, total_examples=len(sentences), epochs=1)     
+                    if not processed % 10000: print('---' + str(processed - threshold) + ' lines trained....')
+                    sentences = []
+                    count = 0
+            else:
+                if not processed % 10000: print('----%s lines skipped...' % (str(processed)) )
+        except EOFError:
+            print('----End of file...')
+            break
+    model.save('wiki_word2vec.model')
+    print('----Model Saved Successfully...')   
+    """
+    ----2000000 lines skipped...
+    ...
+    ----3400000 lines trained....
+    ----End of file...
+    ----Model Saved Successfully...
+    Processing ended.....
+    ----Processed in 170.52s----
+    """
+    
 # mm = corpora.MmCorpus('wiki_corpus.mm')
 
 # strip_wiki_source('wikiraw')
