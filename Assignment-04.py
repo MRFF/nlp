@@ -177,10 +177,11 @@ def continue_train_word2vec(model):
     cut_file = open('cut_lines', 'rb')
     sentences = []
     processed = 0
+    # 上次训练末尾行数的指针
     threshold = 2000000
     # 每次训练的训练量
     batch_size = 200000
-    # 每次训练的指针
+    # 每次训练的行数指针
     count = 0
     while True:
         try:
