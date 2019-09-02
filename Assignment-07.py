@@ -20,7 +20,7 @@ def time_func(f):
     return wrapper
 
 # 评价模型
-def evluate(X, Y):
+def evaluate(clf, X, Y):
     from sklearn.metrics import f1_score
     from sklearn.metrics import accuracy_score
     from sklearn.metrics import precision_score
@@ -89,4 +89,5 @@ if __name__ == "__main__":
         X , Y, train_size = 0.9, test_size=0.1
     )
     knn_y_predicted = knn_train(x_train, y_train)
+    evaluate(knn_clf, X, Y)
     potential_copies = find_potential_copies(y_test, knn_y_predicted)
