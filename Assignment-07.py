@@ -65,7 +65,6 @@ def knn_train(x_train, y_train):
     knn_clf = KNeighborsClassifier(n_neighbors = 7, weights = 'uniform', algorithm = 'auto')
     # 训练模型
     knn_clf.fit(x_train, y_train)
-    y_predicted = knn_clf.predict(x_test)
     return y_predicted
 
 # 找出潜在的抄袭作品，具体条件为预测来源为新华社，但实际又不是的
@@ -88,6 +87,7 @@ if __name__ == "__main__":
     x_train, x_test, y_train, y_test = train_test_split(
         X , Y, train_size = 0.9, test_size=0.1
     )
-    knn_y_predicted = knn_train(x_train, y_train)
-    evaluate(knn_clf, X, Y)
+	knn_clf = knn_train(x_train, y_train)
+    knn_y_predicted = knn_clf.predict(x_test)
+	evaluate(knn_clf, X, Y)
     potential_copies = find_potential_copies(y_test, knn_y_predicted)
